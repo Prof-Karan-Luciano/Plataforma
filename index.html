@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Pular Plataforma</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="jogo">
+    <span id="pontuacao">Altura: 0</span>
+    <canvas id="canvasJogo" width="360" height="600"></canvas>
+    <div id="gameOver" class="oculto">
+      <div class="gameOverBox">
+        <h2>Game Over</h2>
+        <p id="pontuacaoFinal"></p>
+        <button id="btnReiniciar">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

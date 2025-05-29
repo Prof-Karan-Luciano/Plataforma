@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, #aee1f9 0%, #f9f9f9 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+#jogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+#canvasJogo {
+  background: linear-gradient(to top, #e0f7fa 0%, #b2ebf2 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  display: block;
+  margin: 0 auto;
+  transition: box-shadow 0.3s;
+}
+
+#pontuacao {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.8);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#gameOver {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  z-index: 10;
+}
+
+#gameOver.visivel {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.gameOverBox {
+  background: rgba(255,255,255,0.95);
+  padding: 32px 40px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  animation: fadeIn 0.7s;
+}
+
+#btnReiniciar {
+  margin-top: 18px;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #00bcd4;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnReiniciar:hover {
+  background: #0097a7;
+}
+
+.oculto {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  #canvasJogo {
+    width: 98vw;
+    height: 65vw;
+    max-width: 100vw;
+    max-height: 80vh;
+  }
+  .gameOverBox {
+    padding: 18px 8vw;
+  }
+  #pontuacao {
+    font-size: 1rem;
+    padding: 6px 10vw;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
