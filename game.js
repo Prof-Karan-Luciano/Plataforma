@@ -104,37 +104,65 @@ function desenharCena() {
   desenharPersonagem();
 }
 
-// Desenha fundo com gradiente e shapes
+// Desenha fundo com gradiente e shapes (cores IFRO)
 function desenharFundo() {
   const grad = ctx.createLinearGradient(0, canvas.height, 0, 0);
-  grad.addColorStop(0, '#b2ebf2');
-  grad.addColorStop(1, '#e0f7fa');
+  grad.addColorStop(0, '#b6e2c1'); // verde claro IFRO
+  grad.addColorStop(1, '#e8f5e9'); // quase branco
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   // Linhas decorativas
-  ctx.strokeStyle = 'rgba(0,0,0,0.04)';
+  ctx.strokeStyle = 'rgba(0,146,63,0.07)';
   for (let i = 0; i < canvas.height; i += 60) {
     ctx.beginPath();
     ctx.moveTo(0, i);
     ctx.lineTo(canvas.width, i);
     ctx.stroke();
   }
+  desenharLogoIFRO();
 }
 
-// Desenha plataformas
+// Desenha o "logo" do IFRO em pixel art no topo do canvas
+function desenharLogoIFRO() {
+  // Logo IFRO: 3x3 quadrados verdes + 1 quadrado vermelho no topo esquerdo
+  // Tamanho dos pixels
+  const px = 14;
+  const startX = canvas.width/2 - px*2;
+  const startY = 18;
+  // Verde IFRO
+  ctx.fillStyle = '#00923f';
+  // Quadrados verdes
+  ctx.fillRect(startX + px, startY + px, px, px); // meio
+  ctx.fillRect(startX, startY + px*2, px, px); // baixo esquerda
+  ctx.fillRect(startX + px, startY + px*2, px, px); // baixo meio
+  ctx.fillRect(startX + px*2, startY + px*2, px, px); // baixo direita
+  ctx.fillRect(startX + px*2, startY + px, px, px); // meio direita
+  ctx.fillRect(startX + px*2, startY, px, px); // topo direita
+  ctx.fillRect(startX + px, startY, px, px); // topo meio
+  // Quadrado vermelho
+  ctx.fillStyle = '#e53935';
+  ctx.fillRect(startX, startY, px, px); // topo esquerda
+}
+
+// Desenha plataformas (verde IFRO)
 function desenharPlataformas() {
-  ctx.fillStyle = '#0097a7';
   plataformas.forEach(p => {
+    // degrade verde
+    const grad = ctx.createLinearGradient(p.x, p.y, p.x, p.y + p.altura);
+    grad.addColorStop(0, '#00923f');
+    grad.addColorStop(1, '#43a047');
+    ctx.fillStyle = grad;
     ctx.fillRect(p.x, p.y, p.largura, p.altura);
-    ctx.strokeStyle = '#006064';
+    ctx.strokeStyle = '#00662a';
     ctx.strokeRect(p.x, p.y, p.largura, p.altura);
   });
 }
 
-// Desenha personagem
+// Desenha personagem (detalhe verde IFRO)
 function desenharPersonagem() {
   ctx.save();
   ctx.translate(personagem.x + larguraPersonagem/2, personagem.y + alturaPersonagem/2);
+  // Corpo amarelo
   ctx.fillStyle = '#ffb300';
   ctx.beginPath();
   ctx.arc(0, 0, larguraPersonagem/2, 0, Math.PI * 2);
@@ -142,6 +170,9 @@ function desenharPersonagem() {
   ctx.strokeStyle = '#ff6f00';
   ctx.lineWidth = 3;
   ctx.stroke();
+  // Faixa verde IFRO
+  ctx.fillStyle = '#00923f';
+  ctx.fillRect(-10, 8, 20, 5);
   // Olhos
   ctx.fillStyle = '#333';
   ctx.beginPath(); ctx.arc(-6, -4, 3, 0, Math.PI*2); ctx.fill();
@@ -178,9 +209,12 @@ function gerenciarPlataformas() {
   }
 }
 
-// Atualiza HUD de pontuação
+// Atualiza HUD de pontuação (verde IFRO)
 function atualizarPontuacao(valor) {
   pontuacaoSpan.textContent = `Altura: ${valor}`;
+  pontuacaoSpan.style.background = 'rgba(0,146,63,0.13)';
+  pontuacaoSpan.style.color = '#00923f';
+  pontuacaoSpan.style.fontWeight = 'bold';
 }
 
 // Loop principal do jogo
